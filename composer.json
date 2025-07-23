@@ -1,0 +1,10 @@
+{
+    "name": "irina/php-dev-stack",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "Irina\\PhpDevStack\\": "src/"
+        }
+    },
+    "require": {}
+}
