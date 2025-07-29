@@ -3,7 +3,6 @@
 namespace Irina\PhpDevStack\Classes;
 
 use Irina\PhpDevStack\Contracts\FileReaderInterface;
-use Irina\PhpDevStack\Classes\Row;
 use InvalidArgumentException;
 
 class CsvReader implements FileReaderInterface
@@ -23,9 +22,8 @@ class CsvReader implements FileReaderInterface
                 throw new InvalidArgumentException("Row length isssue. Expected $expectedColumns, found " . count($data));
             }
 
-            $rows[] = new Row($data);
+            $rows[] = $data;
         }
-
         fclose($handle);
         return $rows;
     }
