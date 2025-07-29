@@ -4,19 +4,39 @@ namespace Irina\PhpDevStack\Classes;
 
 class Row
 {
+    public function __construct(
+        private array $values = [],
+        private array &$header = [],
+    ) {}
 
-    public function __construct(private array $row)
+    public function getHeader(): array
     {
-        
+        return $this->header;
     }
 
-    public function getRow(): array
+    public function setHeader(array $header): void
     {
-        return $this->row;
+        $this->header = $header;
     }
 
-    public function setRow(array $row): void
+    public function getValues(): array
     {
-        $this->row = $row;
+        return $this->values;
+    }
+
+    public function setValues(array $values): void
+    {
+        $this->values = $values;
+    }
+
+    public function getRowWithHeaders(): array
+    {
+        return array_combine($this->header, $this->values);
+    }
+
+    public function setRowWithHeaders(array $data): void
+    {
+        static::setHeader(array_keys($data));
+        static::setValues(array_values($data));
     }
 }
