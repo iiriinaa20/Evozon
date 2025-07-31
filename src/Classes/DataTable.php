@@ -6,7 +6,8 @@ abstract class DataTable
 {
     protected array $header = [];
     /**
-     * @param Row[]
+     * @param Row[] $tableRows   
+     * @param bool  $hasHeaders  
      */
     public function __construct(
         protected array $tableRows = [],
@@ -17,5 +18,9 @@ abstract class DataTable
     public abstract function prependRow(array $data = []): void;
     public abstract function removeRow(int $index): void;
 
-     public abstract function addColumn(string $columnName,int $position):void;
+    public abstract function addColumn(string $columnName, int $position): void;
+    public abstract function removeColumnByName(string $columnName): void;
+    public abstract function removeColumnByPosition(int $columnPosition): void;
+    public abstract function updateTableColumn(string $columnName, array $newValues, array $positions): void;
+    public abstract  function reorderColumns(array $newHeaders): void;
 }

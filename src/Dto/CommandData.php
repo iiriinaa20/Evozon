@@ -59,6 +59,12 @@ class CommandData
              CommandTypes::INNER_JOIN => [
                 CommandOptions::COLUMN,
                 CommandOptions::FILES
+             ],
+             CommandTypes::SELECT => [
+                CommandOptions::GET,
+                CommandOptions::COLUMN,
+                CommandOptions::OP,
+                CommandOptions::VALUE,
              ]
         ];
     }

@@ -5,6 +5,7 @@ namespace Irina\PhpDevStack\Commands;
 use Irina\PhpDevStack\Commands\Command;
 use Irina\PhpDevStack\Classes\DataTable;
 use Irina\PhpDevStack\Dto\CommandParameters;
+use Irina\PhpDevStack\Services\CsvEncryptDecryptService;
 
 class EncryptColumnCommand extends Command
 {
@@ -21,6 +22,7 @@ class EncryptColumnCommand extends Command
 
     public function run(DataTable $dataTable)
     {
-        $dataTable->encryptColumn($this->column, $this->pubkey);
+        $service = new CsvEncryptDecryptService($dataTable);
+        $service->encryptColumnData($this->column, $this->pubkey);
     }
 }
