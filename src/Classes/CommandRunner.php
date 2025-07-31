@@ -49,6 +49,9 @@ class CommandRunner
             case CommandTypes::INNER_JOIN:
                 $cmd = new \Irina\PhpDevStack\Commands\InnerJoinTablesCommand($params);
                 break;
+            case CommandTypes::SELECT:
+                $cmd = new \Irina\PhpDevStack\Commands\SelectFilterCommand($params);
+                break;
             default:
                 throw new \RuntimeException("Unknown command: {$commandName}");
         }

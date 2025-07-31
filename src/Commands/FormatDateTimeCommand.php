@@ -5,6 +5,7 @@ namespace Irina\PhpDevStack\Commands;
 use Irina\PhpDevStack\Commands\Command;
 use Irina\PhpDevStack\Classes\DataTable;
 use Irina\PhpDevStack\Dto\CommandParameters;
+use Irina\PhpDevStack\Services\CsvColumnModifierService;
 
 class FormatDateTimeCommand extends Command
 {
@@ -21,6 +22,7 @@ class FormatDateTimeCommand extends Command
 
     public function run(DataTable $dataTable)
     {
-        $dataTable->formatDateTime($this->column, $this->format);
+        $service = new CsvColumnModifierService($dataTable);
+        $service->formatDateFromColumn($this->column, $this->format);
     }
 }

@@ -5,6 +5,7 @@ namespace Irina\PhpDevStack\Commands;
 use Irina\PhpDevStack\Classes\DataTable;
 use Irina\PhpDevStack\Commands\Command;
 use Irina\PhpDevStack\Dto\CommandParameters;
+use Irina\PhpDevStack\Services\CsvColumnModifierService;
 
 class TruncateColumnCommand extends Command
 {
@@ -20,6 +21,7 @@ class TruncateColumnCommand extends Command
 
     public function run(DataTable $dataTable)
     {
-        $dataTable->truncateColumn($this->column, $this->len);
+        $service = new CsvColumnModifierService($dataTable);
+        $service->truncateStringFromColumn($this->column, $this->len);
     }
 }

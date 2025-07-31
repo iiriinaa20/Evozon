@@ -16,4 +16,5 @@ enum CommandTypes
     public const SIGN_COLUMN = 'sign';
     public const VERIFY_SIGNED_COLUMN = 'verify';
     public const INNER_JOIN = 'join';
+    public const SELECT = 'select';
 }

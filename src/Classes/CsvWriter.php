@@ -10,8 +10,6 @@ class CsvWriter implements FileWriterInterface
 {
     private array $rows = [];
 
-    public function __construct(private string $outPath) {}
-
     public function setRows(array $rows): void
     {
         if (empty($rows)) {
@@ -27,23 +25,26 @@ class CsvWriter implements FileWriterInterface
         $this->rows = $rows;
     }
 
-    public function write(): void
+    public function write(string $outPath): void
     {
         if (empty($this->rows)) {
             throw new Exception("setRows() before write()!");
         }
 
-        $handle = fopen($this->outPath, 'w');
+        $handle = fopen($outPath, 'w');
 
         if ($handle === false) {
-            throw new Exception("Failed to open file for writing: {$this->outPath}");
+            throw new Exception("Failed to open file for writing: {$outPath}");
         }
 
-        $expectedColumns = count($this->rows[0]->getRow());
+        $expectedColumns = count($this->rows[0]->getHeader());
+        if ($expectedColumns !== 0) {
+            fputcsv($handle, $this->rows[0]->getHeader());
+        }
 
         foreach ($this->rows as $row) {
-            $current = $row->getRow();
-            if (count($current) !== $expectedColumns) {
+            $current = $row->getValues();
+            if ((count($current) !== $expectedColumns) && ($expectedColumns !== 0)) {
                 throw new Exception("Row length issues. Expected $expectedColumns, got " . count($current));
             }
 

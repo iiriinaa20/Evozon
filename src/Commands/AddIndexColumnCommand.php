@@ -5,6 +5,7 @@ namespace Irina\PhpDevStack\Commands;
 use Irina\PhpDevStack\Classes\DataTable;
 use Irina\PhpDevStack\Commands\Command;
 use Irina\PhpDevStack\Dto\CommandParameters;
+use Irina\PhpDevStack\Services\CsvColumnModifierService;
 
 class AddIndexColumnCommand extends Command
 {
@@ -18,6 +19,7 @@ class AddIndexColumnCommand extends Command
 
     public function run(DataTable $dataTable)
     {
-        $dataTable->addIndexedColumn($this->column);
+        $service = new CsvColumnModifierService($dataTable);
+        $service->addIndexedColumn($this->column);
     }
 }

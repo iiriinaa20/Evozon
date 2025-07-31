@@ -5,6 +5,7 @@ namespace Irina\PhpDevStack\Commands;
 use Irina\PhpDevStack\Commands\Command;
 use Irina\PhpDevStack\Classes\DataTable;
 use Irina\PhpDevStack\Dto\CommandParameters;
+use Irina\PhpDevStack\Services\CsvEncryptDecryptService;
 
 class VerifySignedColumnCommand extends Command
 {
@@ -19,6 +20,7 @@ class VerifySignedColumnCommand extends Command
 
     public function run(DataTable $dataTable)
     {
-        $dataTable->verifySignature($this->column, $this->pubkey);
+        $service = new CsvEncryptDecryptService($dataTable);
+        $service->verifySignedColumn($this->column, $this->pubkey);
     }
 }
